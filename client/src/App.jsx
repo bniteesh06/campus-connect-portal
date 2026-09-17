@@ -1,39 +1,54 @@
-import { useState, useEffect } from 'react';
-import AuthModule from './components/AuthModule.jsx';
+import React, { useState, useEffect } from "react";
+import AuthModule from "./components/AuthModule.jsx";
+import StudentPortal from "./components/StudentPortal.jsx";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('login');
+  const [currentPage, setCurrentPage] = useState("home");
+  const [authMode, setAuthMode] = useState("login");
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
 
-      if (hash === '#login') {
-        setActiveTab('login');
-        scrollToAuth();
-      } else if (hash === '#register') {
-        setActiveTab('register');
-        scrollToAuth();
+      if (hash === "#login") {
+        setAuthMode("login");
+        setCurrentPage("login");
+      } else if (hash === "#register") {
+        setAuthMode("register");
+        setCurrentPage("login");
       }
     };
-    const scrollToAuth = () => {
-      const authElement = document.getElementById('auth-section')
-      if (authElement) {
-        authElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
-    handleHashChange(); // Call it initially to set the correct tab based on the current hash
 
-    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
 
     return () => {
-      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener("hashchange", handleHashChange);
     };
-
   }, []);
-  return (
-    <div style={{padding: '20px'}}>
-      <AuthModule initialMode={activeTab} />
-      </div>
-  );
+
+  if (currentPage === "login") {
+    return (
+      <AuthModule
+        initialMode={authMode}
+        onLoginSuccess={() => {
+          setCurrentPage("student");
+        }}
+      />
+    );
+  }
+
+  if (currentPage === "student") {
+    return (
+      <StudentPortal
+        onBackToHome={() => {
+          window.location.hash = "";
+          setCurrentPage("home");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+    );
+  }
+
+  return null;
 }

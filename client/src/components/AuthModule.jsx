@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 
-function App() {
-  const [isLogin, setIsLogin] = useState(true);
+export default function AuthModule({
+  initialMode = "login",
+  onLoginSuccess
+}) {
+  const [isLogin, setIsLogin] = useState(initialMode === "login");
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: ''
+    name: "",
+    email: "",
+    password: ""
   });
+
+  useEffect(() => {
+    setIsLogin(initialMode === "login");
+  }, [initialMode]);
+
+  useEffect(() => {
+    const authElem = document.getElementById("auth-section");
+    if (authElem) {
+      authElem.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [initialMode, isLogin]);
 
   const handleChange = (e) => {
     setFormData({
@@ -20,175 +34,125 @@ function App() {
     e.preventDefault();
 
     if (isLogin) {
-      alert(`Login successful!\nEmail: ${formData.email}`);
+      if (!formData.email || !formData.password) {
+        alert("Please enter your email and password.");
+        return;
+      }
+      alert(`Logged in successfully with ${formData.email}`);
+      if (onLoginSuccess) onLoginSuccess();
     } else {
-      alert(`Registration successful!\nWelcome, ${formData.name}`);
+      if (!formData.name || !formData.email || !formData.password) {
+        alert("Please fill in all the fields.");
+        return;
+      }
+      alert(`RVU student registered successfully!\n\nName: ${formData.name}\nEmail: ${formData.email}`);
+      if (onLoginSuccess) onLoginSuccess();
     }
   };
 
+  const switchMode = (mode) => {
+    window.location.hash = mode;
+    setIsLogin(mode === "login");
+    setFormData({ name: "", email: "", password: "" });
+  };
+
   return (
-    <div style={styles.cardContainer}>
-      <div style={styles.header}>
-        <h1 style={styles.title}>RV UNIVERSITY</h1>
-        <p style={styles.subtitle}>Excellence in Education</p>
+    <div className="auth-card">
+      {/* Top Banner connected directly to the card */}
+      <div className="auth-card-header">
+        <div className="rv-banner-title">RV UNIVERSITY</div>
+        <div className="rv-banner-subtitle">Excellence in Education</div>
       </div>
 
-      <h2 style={styles.formTitle}>
-        {isLogin ? 'Student Login' : 'Student Registration'}
-      </h2>
+      <div className="auth-card-body">
+        <div className="auth-header">
+          <h2>{isLogin ? "Welcome Back" : "Create Account"}</h2>
+          <p>
+            {isLogin
+              ? "Login to access your RVU Campus Connect account"
+              : "Register as an RVU student"}
+          </p>
+        </div>
 
-      <div style={styles.tabContainer}>
-        <button
-          type="button"
-          style={isLogin ? styles.activeTab : styles.inactiveTab}
-          onClick={() => setIsLogin(true)}
-        >
-          Login
-        </button>
+        <div className="auth-tabs">
+          <button
+            type="button"
+            className={isLogin ? "auth-tab active" : "auth-tab"}
+            onClick={() => switchMode("login")}
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            className={!isLogin ? "auth-tab active" : "auth-tab"}
+            onClick={() => switchMode("register")}
+          >
+            Register
+          </button>
+        </div>
 
-        <button
-          type="button"
-          style={!isLogin ? styles.activeTab : styles.inactiveTab}
-          onClick={() => setIsLogin(false)}
-        >
-          Register
-        </button>
+        <form onSubmit={handleSubmit}>
+          {!isLogin && (
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your full name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </div>
+          )}
+
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" className="auth-submit">
+            {isLogin ? "Login" : "Register"}
+          </button>
+        </form>
+
+        <div className="auth-switch">
+          {isLogin ? (
+            <>
+              Don't have an account?{" "}
+              <button type="button" onClick={() => switchMode("register")}>
+                Register
+              </button>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <button type="button" onClick={() => switchMode("login")}>
+                Login
+              </button>
+            </>
+          )}
+        </div>
       </div>
-
-      <form onSubmit={handleSubmit} style={styles.form}>
-        {!isLogin && (
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-            style={styles.input}
-            required
-          />
-        )}
-
-        <input
-          type="email"
-          name="email"
-          placeholder="RVU Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          style={styles.input}
-          required
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          style={styles.input}
-          required
-        />
-
-        <button type="submit" style={styles.submitBtn}>
-          {isLogin ? 'Sign In to Portal' : 'Create Student Account'}
-        </button>
-      </form>
     </div>
   );
 }
-
-const styles = {
-  cardContainer: {
-    maxWidth: '400px',
-    margin: '30px auto',
-    padding: '30px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-    backgroundColor: '#ffffff',
-    textAlign: 'center',
-    fontFamily: 'Arial, sans-serif',
-    boxSizing: 'border-box'
-  },
-
-  header: {
-    backgroundColor: '#0A2240',
-    padding: '15px',
-    borderRadius: '6px',
-    marginBottom: '20px'
-  },
-
-  title: {
-    color: '#F2A900',
-    margin: 0,
-    fontSize: '22px',
-    letterSpacing: '1px'
-  },
-
-  subtitle: {
-    color: '#ffffff',
-    margin: '4px 0 0 0',
-    fontSize: '12px'
-  },
-
-  formTitle: {
-    color: '#0A2240',
-    fontSize: '18px',
-    marginBottom: '15px'
-  },
-
-  tabContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '10px',
-    marginBottom: '20px'
-  },
-
-  activeTab: {
-    flex: 1,
-    padding: '10px',
-    backgroundColor: '#0A2240',
-    color: '#F2A900',
-    border: 'none',
-    fontWeight: 'bold',
-    borderRadius: '4px',
-    cursor: 'pointer'
-  },
-
-  inactiveTab: {
-    flex: 1,
-    padding: '10px',
-    backgroundColor: '#e0e0e0',
-    color: '#333333',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
-  },
-
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '15px'
-  },
-
-  input: {
-    padding: '12px',
-    borderRadius: '4px',
-    border: '1px solid #cccccc',
-    fontSize: '14px',
-    outline: 'none',
-    boxSizing: 'border-box',
-    width: '100%'
-  },
-
-  submitBtn: {
-    padding: '12px',
-    backgroundColor: '#F2A900',
-    color: '#0A2240',
-    border: 'none',
-    borderRadius: '4px',
-    fontWeight: 'bold',
-    fontSize: '15px',
-    cursor: 'pointer'
-  }
-};
-
-export default App;
