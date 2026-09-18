@@ -1,8 +1,8 @@
 /* ============================================================================= */
-/* [EXPERIMENT 4: APPLICATION ROUTING] State-Driven Page View Routing            */
+/* [EXPERIMENT 4 & 5: APPLICATION ROUTING] State-Driven Page View Routing        */
 /* ----------------------------------------------------------------------------- */
 /* Handles routing between the landing page, authentication module, and the      */
-/* interactive Student Portal application state container.                       */
+/* interactive, modular Student Portal application container (React Components). */
 /* ============================================================================= */
 
 import React, { useState, useEffect } from "react";

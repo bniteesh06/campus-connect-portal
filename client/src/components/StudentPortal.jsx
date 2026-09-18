@@ -1,15 +1,31 @@
+/* ============================================================================= */
+/* [EXPERIMENT 4 & 5: START] Modular Frontend Application & State Architecture   */
+/* ----------------------------------------------------------------------------- */
+/* [EXPERIMENT 4] In-Memory State Handling: Central state array, add, edit,     */
+/*               toggle status, remove item, live derived summary metrics.       */
+/* [EXPERIMENT 5] Component-Based Architecture: Decomposed into reusable child   */
+/*               components communicating via props and event handlers:          */
+/*               - StatBadge.jsx (reusable metrics pill)                         */
+/*               - AssignmentForm.jsx (modular form with local controlled state) */
+/*               - AssignmentCard.jsx (modular item card with action callbacks)  */
+/*               - NoticeCard.jsx (reusable notice card with props)              */
+/*               - AttendanceCard.jsx (reusable attendance card with props)      */
+/* ============================================================================= */
+
 import React, { useState } from "react";
 import "../style.css";
-
-/* ============================================================================= */
-/* [EXPERIMENT 4: START] Building an Interactive Web Application with State Handling */
-/* ----------------------------------------------------------------------------- */
-/* Aim: Manage application state in memory and update the UI whenever that state  */
-/* changes (add item, edit/toggle item, remove item, state filtering).            */
-/* ============================================================================= */
+import StatBadge from "./StatBadge.jsx";
+import AssignmentForm from "./AssignmentForm.jsx";
+import AssignmentCard from "./AssignmentCard.jsx";
+import NoticeCard from "./NoticeCard.jsx";
+import AttendanceCard from "./AttendanceCard.jsx";
 
 export default function StudentPortal({ onBackToHome }) {
-  // --- EXPERIMENT 4: APPLICATION STATE DECLARATIONS (Step 5) ---
+  // =============================================================================
+  // [EXPERIMENT 4: START] In-Memory State Declarations & State Mutation Handlers
+  // -----------------------------------------------------------------------------
+  // Step 5: Central application state declared using React useState hook.
+  // =============================================================================
   const [activeTab, setActiveTab] = useState("assignments");
 
   // State 1: Central State Array for Assignments
@@ -37,15 +53,10 @@ export default function StudentPortal({ onBackToHome }) {
     },
   ]);
 
-  // State 2: Form Input States for adding new assignments
-  const [newTitle, setNewTitle] = useState("");
-  const [newSubject, setNewSubject] = useState("");
-  const [newDue, setNewDue] = useState("");
-
-  // State 3: Filter State ('all' | 'Pending' | 'Submitted')
+  // State 2: Filter State ('all' | 'Pending' | 'Submitted')
   const [filter, setFilter] = useState("all");
 
-  // Static Notices data
+  // Sample static Notices data passed to reusable child NoticeCard components
   const notices = [
     {
       id: 1,
@@ -61,7 +72,7 @@ export default function StudentPortal({ onBackToHome }) {
     },
   ];
 
-  // Static Attendance data
+  // Sample static Attendance data passed to reusable child AttendanceCard components
   const attendance = [
     {
       id: 1,
@@ -75,32 +86,20 @@ export default function StudentPortal({ onBackToHome }) {
     },
   ];
 
-  // --- EXPERIMENT 4: STATE MUTATION ROUTINES ---
+  // --- EXPERIMENT 4: STATE MUTATION ROUTINES (Invoked by child callback props) ---
 
-  // Step 6: Add Item to State
-  const handleAddAssignment = (e) => {
-    e.preventDefault();
-    if (!newTitle.trim()) {
-      alert("Please enter an assignment title!");
-      return;
-    }
-
+  // Step 6: Add New Item to Parent State (invoked by AssignmentForm via onAddAssignment prop)
+  const handleAddAssignment = (newAssignmentData) => {
     const newAssignment = {
       id: Date.now(),
-      title: newTitle.trim(),
-      subject: newSubject.trim() || "CS3301 - Full Stack Development",
-      due: newDue.trim() || "Sept 30, 2026",
+      ...newAssignmentData,
       status: "Pending",
     };
 
-    // Updating state array (triggers automatic UI redraw)
     setAssignmentsList([newAssignment, ...assignmentsList]);
-    setNewTitle("");
-    setNewSubject("");
-    setNewDue("");
   };
 
-  // Step 8: Edit/Toggle Item State
+  // Step 8: Edit/Toggle Item State (invoked by AssignmentCard via onToggleStatus prop)
   const handleToggleStatus = (id) => {
     setAssignmentsList((prevList) =>
       prevList.map((item) =>
@@ -114,20 +113,24 @@ export default function StudentPortal({ onBackToHome }) {
     );
   };
 
-  // Step 8: Remove Item from State
+  // Step 8: Remove Item from State (invoked by AssignmentCard via onDelete prop)
   const handleDeleteAssignment = (id) => {
     setAssignmentsList((prevList) => prevList.filter((item) => item.id !== id));
   };
 
-  // Step 7: Redrawing interface based on current state & filter
+  // Step 7: Redraw List from Current Filter State
   const filteredAssignments = assignmentsList.filter((item) => {
     if (filter === "all") return true;
     return item.status === filter;
   });
 
+  // Step 9: Derived State Statistics (Total, Pending, Submitted counts)
   const totalCount = assignmentsList.length;
   const pendingCount = assignmentsList.filter((a) => a.status === "Pending").length;
   const submittedCount = assignmentsList.filter((a) => a.status === "Submitted").length;
+  // =============================================================================
+  // [EXPERIMENT 4: END] In-Memory State Declarations & State Mutation Handlers
+  // =============================================================================
 
   return (
     <div className="student-portal">
@@ -177,54 +180,32 @@ export default function StudentPortal({ onBackToHome }) {
       {/* Main Content Area */}
       <main className="student-content">
         {/* =================================================================== */}
-        {/* TAB 1: ASSIGNMENTS (EXPERIMENT 4 STATE-DRIVEN COMPONENT)            */}
+        {/* [EXPERIMENT 5: START] Component-Based Architecture & Props Passing   */}
+        {/* ------------------------------------------------------------------- */}
+        {/* Step 3: Parent component (StudentPortal) composing child components  */}
+        {/* Step 4 & 5: Passing data down to children using props                */}
+        {/* Step 7 & 8: Handling child events via callback props                 */}
+        {/* Step 10: Reusing components with different props (StatBadge, etc.)  */}
         {/* =================================================================== */}
+
+        {/* TAB 1: ASSIGNMENTS (EXPERIMENT 5 COMPONENT COMPOSITION) */}
         {activeTab === "assignments" && (
           <section className="assignment-state-section">
             <div className="section-header-row">
               <div>
                 <h3>📝 Interactive Assignment &amp; Submission Manager</h3>
-                <p className="state-desc">
-                  [Experiment 4] State-driven application. Adding, editing, and deleting items directly mutates in-memory state and automatically redraws the UI.
-                </p>
               </div>
 
-              {/* State Derived Summary Badges */}
+              {/* EXPERIMENT 5: Reusable StatBadge Component with Props */}
               <div className="state-stats-bar">
-                <span className="stat-pill total">Total: {totalCount}</span>
-                <span className="stat-pill pending">Pending: {pendingCount}</span>
-                <span className="stat-pill submitted">Submitted: {submittedCount}</span>
+                <StatBadge label="Total" count={totalCount} type="total" />
+                <StatBadge label="Pending" count={pendingCount} type="pending" />
+                <StatBadge label="Submitted" count={submittedCount} type="submitted" />
               </div>
             </div>
 
-            {/* Step 6: Form to Add New Assignment to State */}
-            <form onSubmit={handleAddAssignment} className="add-assignment-form">
-              <input
-                type="text"
-                placeholder="Assignment title (e.g., Lab 4: State Management)..."
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                className="portal-input"
-                required
-              />
-              <input
-                type="text"
-                placeholder="Course/Subject (e.g., CS3301)"
-                value={newSubject}
-                onChange={(e) => setNewSubject(e.target.value)}
-                className="portal-input-sm"
-              />
-              <input
-                type="text"
-                placeholder="Due date (e.g., Oct 05, 2026)"
-                value={newDue}
-                onChange={(e) => setNewDue(e.target.value)}
-                className="portal-input-sm"
-              />
-              <button type="submit" className="add-assignment-btn">
-                + Add Assignment
-              </button>
-            </form>
+            {/* EXPERIMENT 5: Reusable AssignmentForm Component with callback prop */}
+            <AssignmentForm onAddAssignment={handleAddAssignment} />
 
             {/* Filter Controls (State-Driven Filtering) */}
             <div className="assignment-filters">
@@ -252,47 +233,18 @@ export default function StudentPortal({ onBackToHome }) {
               </button>
             </div>
 
-            {/* Step 7: Redrawing List from Current State */}
+            {/* EXPERIMENT 5: Reusable AssignmentCard Component rendered for each item */}
             <div className="assignment-list">
               {filteredAssignments.length === 0 ? (
                 <p className="empty-state-msg">No assignments found for this filter.</p>
               ) : (
                 filteredAssignments.map((assignment) => (
-                  <div className="assignment-item" key={assignment.id}>
-                    <div className="assignment-info">
-                      <h4>{assignment.title}</h4>
-                      <p>
-                        {assignment.subject} • Due: {assignment.due}
-                      </p>
-                    </div>
-
-                    <div className="assignment-actions">
-                      {/* Step 8: Edit / Toggle Item State on Click */}
-                      <button
-                        type="button"
-                        className={
-                          assignment.status === "Submitted"
-                            ? "status submitted clickable-status"
-                            : "status pending clickable-status"
-                        }
-                        onClick={() => handleToggleStatus(assignment.id)}
-                        title="Click to toggle status (Pending / Submitted)"
-                      >
-                        {assignment.status === "Submitted" ? "✓ Submitted" : "⏳ Pending"}
-                        <span className="toggle-hint">Click to toggle</span>
-                      </button>
-
-                      {/* Step 8: Remove Item from State */}
-                      <button
-                        type="button"
-                        className="delete-assignment-btn"
-                        onClick={() => handleDeleteAssignment(assignment.id)}
-                        title="Delete assignment"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
+                  <AssignmentCard
+                    key={assignment.id}
+                    assignment={assignment}
+                    onToggleStatus={handleToggleStatus}
+                    onDelete={handleDeleteAssignment}
+                  />
                 ))
               )}
             </div>
@@ -300,43 +252,47 @@ export default function StudentPortal({ onBackToHome }) {
         )}
 
         {/* =================================================================== */}
-        {/* TAB 2: NOTICES & EVENTS                                             */}
+        {/* TAB 2: NOTICES & EVENTS (EXPERIMENT 5 REUSABLE NoticeCard)          */}
         {/* =================================================================== */}
         {activeTab === "notices" && (
           <section>
             <h3>📢 Campus Notices &amp; Events</h3>
             <div className="notice-list">
               {notices.map((notice) => (
-                <div className="notice-item" key={notice.id}>
-                  <div>
-                    <h4>{notice.title}</h4>
-                    <p>
-                      {notice.department} • {notice.date}
-                    </p>
-                  </div>
-                  <button className="details-btn">View Details</button>
-                </div>
+                <NoticeCard
+                  key={notice.id}
+                  notice={notice}
+                  onViewDetails={(n) =>
+                    alert(
+                      `Announcement: ${n.title}\nDepartment: ${n.department}\nDate: ${n.date}`
+                    )
+                  }
+                />
               ))}
             </div>
           </section>
         )}
 
         {/* =================================================================== */}
-        {/* TAB 3: ATTENDANCE TRACKER                                           */}
+        {/* TAB 3: ATTENDANCE TRACKER (EXPERIMENT 5 REUSABLE AttendanceCard)    */}
         {/* =================================================================== */}
         {activeTab === "attendance" && (
           <section>
             <h3>📊 Attendance Tracker</h3>
             <div className="attendance-grid">
               {attendance.map((item) => (
-                <div className="attendance-card" key={item.id}>
-                  <h4>{item.subject}</h4>
-                  <strong>{item.percentage} Attendance</strong>
-                </div>
+                <AttendanceCard
+                  key={item.id}
+                  subject={item.subject}
+                  percentage={item.percentage}
+                />
               ))}
             </div>
           </section>
         )}
+        {/* =================================================================== */}
+        {/* [EXPERIMENT 5: END] Component-Based Architecture & Props Passing     */}
+        {/* =================================================================== */}
 
         {/* =================================================================== */}
         {/* TAB 4: PROFILE                                                      */}
@@ -367,6 +323,7 @@ export default function StudentPortal({ onBackToHome }) {
     </div>
   );
 }
+
 /* ============================================================================= */
-/* [EXPERIMENT 4: END] Interactive Web Application with State Handling           */
+/* [EXPERIMENT 4 & 5: END] Modular Frontend Application & State Architecture     */
 /* ============================================================================= */
