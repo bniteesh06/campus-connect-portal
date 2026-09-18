@@ -8,10 +8,10 @@
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -23,12 +23,38 @@ body {
     color: #333;
 }
 
+/* ================================= */
+/* NAVBAR                            */
+/* ================================= */
 .navbar {
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #e2e8f0;
+    background-color: #ffffff;
+}
+
+/* Primary Navigation Menu */
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+    color: var(--primary-green);
+    background-color: rgba(13, 92, 58, 0.08);
 }
 
 /* Container for the navigation buttons */
@@ -39,7 +65,9 @@ body {
 }
 
 /* Base button box styles */
-.btn-primary, .btn-secondary, .btn-tertiary {
+.btn-primary,
+.btn-secondary,
+.btn-tertiary {
     display: inline-block;
     padding: 0.5rem 1.25rem;
     text-decoration: none;
@@ -88,7 +116,7 @@ body {
 }
 
 .university-name {
-    font-weight: 800;   
+    font-weight: 800;
 }
 
 .sub-dept {
@@ -96,6 +124,9 @@ body {
     color: #555;
 }
 
+/* ================================= */
+/* HERO BANNER                       */
+/* ================================= */
 .hero-banner {
     background: linear-gradient(135deg, var(--primary-green) 0%, #052e1c 100%);
     color: white;
@@ -132,9 +163,18 @@ body {
     color: #0d5c3a;
     background-color: white;
     border: 2px solid var(--primary-green);
-    padding: 0.1rem 1.5rem;
-    font-size: 1.25rem;
+    padding: 0.4rem 1.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
     border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-hero-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-hero-secondary {
@@ -145,6 +185,9 @@ body {
     text-decoration: none;
 }
 
+/* ================================= */
+/* SECTION CONTAINERS                */
+/* ================================= */
 .section-container {
     padding: 4rem 2rem;
     max-width: 1200px;
@@ -167,31 +210,119 @@ body {
     margin-bottom: 2rem;
 }
 
-.flow-image-card {
-    background: white;
-    padding: 1rem;
+/* ================================= */
+/* CAROUSEL (Highlights)             */
+/* ================================= */
+.carousel-wrapper {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.flow-img {
+.carousel-track-container {
+    overflow: hidden;
     width: 100%;
-    max-width: 850px;
-    border-radius: 12px;
 }
 
-/* Role Cards */
-/* Portal Section Styling */
+.carousel-track {
+    position: relative;
+    width: 100%;
+}
+
+.slide {
+    display: none;
+    position: relative;
+}
+
+.slide.active-slide {
+    display: block;
+}
+
+.slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(13, 92, 58, 0.85);
+    color: white;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    transition: background 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--primary-green);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: #cbd5e1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active-dot {
+    background-color: var(--primary-green);
+    width: 24px;
+    border-radius: 6px;
+}
+
+/* ================================= */
+/* ROLES & CARDS (Experiment 2)      */
+/* ================================= */
 #roles {
     background-color: #e8edf2;
-    padding: 3.5rem 2rem 0 2rem;
+    padding: 3.5rem 2rem 3.5rem 2rem;
 }
 
 #roles .section-title {
     color: #2c3e50;
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .roles-grid {
@@ -199,30 +330,37 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     max-width: 1100px;
-    margin: 0 auto;
+    margin: 2.5rem auto 0 auto;
 }
 
 .role-card {
     background: #ffffff;
-    padding: 2rem 1.5rem;
+    padding: 2.2rem 1.75rem;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+/* Interactive Card Hover Effect (Experiment 2) */
+.role-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 
 .student-border {
-    border-top: 5px solid #2e7d32;
+    border-top: 5px solid var(--student-color);
 }
 
 .faculty-border {
-    border-top: 5px solid #1565c0;
+    border-top: 5px solid var(--faculty-color);
 }
 
 .admin-border {
-    border-top: 5px solid #6a1b9a;
+    border-top: 5px solid var(--admin-color);
 }
 
 .role-icon {
@@ -272,155 +410,26 @@ body {
     text-decoration: none;
     display: block;
     box-sizing: border-box;
+    transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.student-bg { background-color: #2e7d32; }
-.faculty-bg { background-color: #1565c0; }
-.admin-bg { background-color: #6a1b9a; }
-
-/* RV University Bottom Banner */
-.rv-banner-card {
-    background-color: #172033;
-    max-width: 360px;
-    margin: 3.5rem auto 0 auto;
-    padding: 1rem 1.5rem;
-    border-radius: 10px 10px 0 0;
-    text-align: center;
+/* Interactive Button Hover State */
+.btn-portal:hover {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
-.rv-banner-title {
-    color: #f2a900;
-    font-weight: 800;
-    font-size: 1.15rem;
-    letter-spacing: 0.5px;
+.student-bg {
+    background-color: var(--student-color);
 }
 
-.rv-banner-subtitle {
-    color: #ffffff;
-    font-size: 0.8rem;
-    margin-top: 3px;
-    opacity: 0.9;
+.faculty-bg {
+    background-color: var(--faculty-color);
 }
 
-.student-border {
-    border-color: var(--student-color);
-}
-
-.faculty-border {
-    border-color: var(--faculty-color);
-}
-
-.admin-border {
-    border-color: var(--admin-color);
-}
-
-.role-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.feature-bullets {
-    list-style: none;
-    margin: 1.2rem 0;
-    color: #475569;
-}
-
-.feature-bullets li {
-    padding: 6px 0;
-    font-size: 0.9rem;
-}
-
-.btn-portal {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.carousel-wrapper {
-    position: relative;
-    max-width: 900px;
-    margin: 0 auto;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.carousel-track-container {
-    overflow: hidden;
-    width: 100%;
-}
-
-.slide img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    display: block;
-}
-
-.slide-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(13, 92, 58, 0.85);
-    color: white;
-    padding: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-align: center;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 1.5rem;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10;
-    transition: background 0.3s ease;
-}
-
-.carousel-btn:hover {
-    background: var(--primary-green);
-}
-
-.prev-btn { 
-    left: 10px;
-}
-
-.next-btn {
-    right: 10px;
-}
-
-.carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 1rem;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    background-color: #cbd5e1;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.dot.active-dot {
-    background-color: var(--primary-green);
-    width: 24px;
-    border-radius: 6px;
+.admin-bg {
+    background-color: var(--admin-color);
 }
 
 /* ================================= */
@@ -449,7 +458,7 @@ body {
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
-    overflow: hidden; /* Clips top header to match card rounded corners */
+    overflow: hidden;
     text-align: left;
 }
 
@@ -569,16 +578,16 @@ body {
 /* ================================= */
 /* STUDENT PORTAL                    */
 /* ================================= */
-
 .student-portal {
-    min-height: 100vh;
-    background: #eef3f6;
-    color: #263238;
-    padding: 40px;
+    min-height: 50vh;
+    background: white;
+    color: black;
+    padding: 100px;
+    border-radius: 100px 100px
 }
 
 .student-header {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     background: #172033;
     padding: 20px 25px;
@@ -615,7 +624,7 @@ body {
 }
 
 .portal-tabs {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     background: #dce5e9;
@@ -643,7 +652,7 @@ body {
 }
 
 .student-content {
-    max-width: 950px;
+    max-width: 1200px;
     margin: 0 auto;
     background: #ffffff;
     padding: 30px 25px;
@@ -759,34 +768,134 @@ body {
     border-bottom: 1px solid #e5e8ea;
 }
 
-/* MOBILE */
-@media (max-width: 700px) {
-    .student-portal {
-        padding: 15px;
-    }
+/* ================================= */
+/* CAMPUS FOOTER (Experiment 2)      */
+/* ================================= */
+.campus-footer {
+    background-color: #072418;
+    color: #e2e8f0;
+    padding-top: 3.5rem;
+    border-top: 4px solid var(--accent-green);
+}
 
-    .student-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 2.5rem;
+}
 
-    .portal-tabs {
-        flex-direction: column;
-    }
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
 
-    .portal-tab {
-        width: 100%;
-    }
+.footer-uni-name {
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+}
 
-    .notice-item,
-    .assignment-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
+.footer-tagline {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 1.2rem;
+}
 
-    .attendance-grid {
-        grid-template-columns: 1fr;
-    }
+.footer-course-tag {
+    font-size: 0.85rem;
+    color: #f2a900;
+    background: rgba(242, 169, 0, 0.1);
+    padding: 6px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    border: 1px solid rgba(242, 169, 0, 0.3);
+}
+
+.footer-heading {
+    color: #f2a900;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-nav ul,
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.footer-nav a,
+.footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.footer-nav a:hover,
+.footer-links a:hover {
+    color: #4ade80;
+    transform: translateX(4px);
+}
+
+.footer-address {
+    font-style: normal;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #cbd5e1;
+}
+
+.footer-address strong {
+    color: #ffffff;
+}
+
+.contact-line {
+    display: block;
+    margin-top: 0.4rem;
+}
+
+.contact-line a {
+    color: #4ade80;
+    text-decoration: none;
+}
+
+.contact-line a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    background-color: #03150e;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.25rem 2rem;
+}
+
+.footer-bottom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.footer-exp-badge {
+    color: #f2a900;
+    font-weight: 600;
 }

@@ -1,12 +1,17 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Campus Connect Portal</title>
+  <meta name="description"
+    content="Campus Connect Portal - RV University School of Computer Science & Engineering. Connecting Students, Faculty, and Administrators on a single digital platform." />
+  <title>Campus Connect Portal | RV University</title>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
+
 <body>
+  <!-- Semantic Header with Brand and Navigation -->
   <header class="navbar">
     <div class="logo-group">
       <div class="brand-badge">RV</div>
@@ -15,109 +20,191 @@
         <p class="sub-dept">School of Computer Science &amp; Engineering</p>
       </div>
     </div>
+
+    <!-- Semantic Primary Navigation -->
+    <nav class="nav-menu" aria-label="Primary Navigation">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#highlights" class="nav-link">Highlights</a>
+      <a href="#roles" class="nav-link">Portals</a>
+    </nav>
+
+    <!-- Navigation Action Buttons -->
     <div class="nav-actions">
       <a href="#login" class="btn-secondary">Login</a>
       <a href="#register" class="btn-primary">Register</a>
     </div>
   </header>
 
-  <section class="hero-banner">
-    <div class="hero-content">
-      <span class="module-tag">CS3301 - FULL STACK DEVELOPMENT</span>
-      <h1>CAMPUS CONNECT PORTAL</h1>
-      <p class="subtitle">Connecting Students, Faculty, and Administrators on a Single Digital Platform.</p>
-      <div class="hero-cta-group">
-        <a href="#roles" class="btn-hero-primary">Explore User Portals &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-container">
-    <h2 class="section-title">Campus Life &amp; Portal Highlights</h2>
-    <p class="section-subtitle">Experience academic management simplified through modern technology.</p>
-    <div class="carousel-wrapper">
-      <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Previous image">&#10094;</button>
-      <div class="carousel-track-container">
-        <div class="carousel-track" id="carouselTrack">
-          <div class="slide active-slide">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="University Campus" />
-            <div class="slide-caption">Modern University Infrastructure</div>
-          </div>
-          <div class="slide">
-            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Student Collaboration" />
-            <div class="slide-caption">Collaborative Learning &amp; Hackathons</div>
-          </div>
-          <div class="slide">
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="Digital Dashboard" />
-            <div class="slide-caption">Real-Time Academic Management</div>
-          </div>
+  <!-- Semantic Main Content Container -->
+  <main id="main-content">
+    <!-- Section 1: Hero Banner -->
+    <section id="hero" class="hero-banner">
+      <div class="hero-content">
+        <span class="module-tag">CS3301 - FULL STACK DEVELOPMENT</span>
+        <h1>CAMPUS CONNECT PORTAL</h1>
+        <p class="subtitle">Connecting Students, Faculty, and Administrators on a Single Digital Platform.</p>
+        <div class="hero-cta-group">
+          <a href="#roles" class="btn-hero-primary">Explore User Portals &rarr;</a>
         </div>
       </div>
-      <button class="carousel-btn next-btn" id="nextBtn" aria-label="Next image">&#10095;</button>
-    </div>
-    <div class="carousel-dots" id="carouselDots">
-      <span class="dot active-dot" data-index="0" role="button" tabIndex="0"></span>
-      <span class="dot" data-index="1" role="button" tabIndex="0"></span>
-      <span class="dot" data-index="2" role="button" tabIndex="0"></span>
-    </div>
-  </section>
+    </section>
 
-  <section id="roles" class="section-container bg-light">
-    <h2 class="section-title">Choose Your Portal View</h2>
-
-    <div class="roles-grid">
-      <!-- Student Portal -->
-      <article class="role-card student-border">
-        <div>
-          <div class="role-icon">🧑‍🎓</div>
-          <h3>Student Portal</h3>
-          <ul class="feature-bullets">
-            <li>View Notices &amp; Events</li>
-            <li>Submit Assignments</li>
-            <li>Track Attendance</li>
-            <li>Update Profile</li>
-          </ul>
+    <!-- Section 2: Highlights / Carousel -->
+    <section id="highlights" class="section-container">
+      <h2 class="section-title">Campus Life &amp; Portal Highlights</h2>
+      <p class="section-subtitle">Experience academic management simplified through modern technology.</p>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Previous image">&#10094;</button>
+        <div class="carousel-track-container">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="slide active-slide">
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&amp;w=1000&amp;auto=format&amp;fit=crop"
+                alt="Modern University Infrastructure at RV University" />
+              <div class="slide-caption">Modern University Infrastructure</div>
+            </div>
+            <div class="slide">
+              <img
+                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&amp;w=1000&amp;auto=format&amp;fit=crop"
+                alt="Students Collaborating on Tech Projects and Hackathons" />
+              <div class="slide-caption">Collaborative Learning &amp; Hackathons</div>
+            </div>
+            <div class="slide">
+              <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&amp;w=1000&amp;auto=format&amp;fit=crop"
+                alt="Real-Time Digital Academic Dashboard" />
+              <div class="slide-caption">Real-Time Academic Management</div>
+            </div>
+          </div>
         </div>
-        <a href="#login" class="btn-portal student-bg">Access Student View</a>
-      </article>
+        <button class="carousel-btn next-btn" id="nextBtn" aria-label="Next image">&#10095;</button>
+      </div>
+      <div class="carousel-dots" id="carouselDots">
+        <span class="dot active-dot" data-index="0" role="button" tabIndex="0" aria-label="Slide 1"></span>
+        <span class="dot" data-index="1" role="button" tabIndex="0" aria-label="Slide 2"></span>
+        <span class="dot" data-index="2" role="button" tabIndex="0" aria-label="Slide 3"></span>
+      </div>
+    </section>
 
-      <!-- Faculty Portal -->
-      <article class="role-card faculty-border">
-        <div>
-          <div class="role-icon">👩‍🏫</div>
-          <h3>Faculty Portal</h3>
-          <ul class="feature-bullets">
-            <li>Post Notices &amp; Events</li>
-            <li>Create Assignments</li>
-            <li>Mark Attendance</li>
-            <li>View Submissions</li>
-          </ul>
-        </div>
-        <button class="btn-portal faculty-bg">Access Faculty View</button>
-      </article>
+    <!-- Section 3: User Portals Grid -->
+    <section id="roles" class="section-container bg-light">
+      <h2 class="section-title">Choose Your Portal View</h2>
+      <p class="section-subtitle">Dedicated dashboards designed for every stakeholder in the campus ecosystem.</p>
 
-      <!-- Admin Portal -->
-      <article class="role-card admin-border">
-        <div>
-          <div class="role-icon">🛡️</div>
-          <h3>Admin Portal</h3>
-          <ul class="feature-bullets">
-            <li>Manage Users</li>
-            <li>Manage Notices &amp; Events</li>
-            <li>View System Reports</li>
-            <li>System Settings</li>
-          </ul>
+      <div class="roles-grid">
+        <!-- Student Portal -->
+        <article class="role-card student-border">
+          <div>
+            <div class="role-icon" aria-hidden="true">🧑‍🎓</div>
+            <h3>Student Portal</h3>
+            <ul class="feature-bullets">
+              <li>View Notices &amp; Events</li>
+              <li>Submit Assignments</li>
+              <li>Track Attendance</li>
+              <li>Update Profile</li>
+            </ul>
+          </div>
+          <a href="#login" class="btn-portal student-bg">Access Student View</a>
+        </article>
+
+        <!-- Faculty Portal -->
+        <article class="role-card faculty-border">
+          <div>
+            <div class="role-icon" aria-hidden="true">👩‍🏫</div>
+            <h3>Faculty Portal</h3>
+            <ul class="feature-bullets">
+              <li>Post Notices &amp; Events</li>
+              <li>Create Assignments</li>
+              <li>Mark Attendance</li>
+              <li>View Submissions</li>
+            </ul>
+          </div>
+          <button class="btn-portal faculty-bg">Access Faculty View</button>
+        </article>
+
+        <!-- Admin Portal -->
+        <article class="role-card admin-border">
+          <div>
+            <div class="role-icon" aria-hidden="true">🛡️</div>
+            <h3>Admin Portal</h3>
+            <ul class="feature-bullets">
+              <li>Manage Users</li>
+              <li>Manage Notices &amp; Events</li>
+              <li>View System Reports</li>
+              <li>System Settings</li>
+            </ul>
+          </div>
+          <button class="btn-portal admin-bg">Access Admin View</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 4: React Mount Point -->
+    <section id="auth-section">
+      <div id="auth-root"></div>
+    </section>
+  </main>
+
+  <!-- Semantic Footer -->
+  <footer class="campus-footer">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <div class="footer-brand">
+          <span class="brand-badge">RV</span>
+          <span class="footer-uni-name">RV UNIVERSITY</span>
         </div>
-        <button class="btn-portal admin-bg">Access Admin View</button>
-      </article>
+        <p class="footer-tagline">
+          Go, Change the World. RV University is a state-private university established in Bengaluru, committed to
+          excellence in education, liberal learning, and research.
+        </p>
+        <p class="footer-course-tag">
+          <strong>Course:</strong> CS3301 &ndash; Full Stack Development
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Quick Links</h4>
+        <nav class="footer-nav" aria-label="Footer Quick Links">
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#highlights">Highlights</a></li>
+            <li><a href="#roles">Portals</a></li>
+            <li><a href="#login">Student Login</a></li>
+            <li><a href="#register">Register</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">User Portals</h4>
+        <ul class="footer-links">
+          <li><a href="#login">Student Dashboard</a></li>
+          <li><a href="#roles">Faculty Workspace</a></li>
+          <li><a href="#roles">Admin Control Center</a></li>
+          <li><a href="#roles">Examinations &amp; Results</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Campus Address</h4>
+        <address class="footer-address">
+          RV Vidyaniketan, 8th Mile,<br />
+          Mysuru Road, RVCE Post,<br />
+          Bengaluru, Karnataka 560059, India<br />
+          <span class="contact-line"><strong>Phone:</strong> +91 80 68199900</span>
+          <span class="contact-line"><strong>Web:</strong> <a href="https://www.rvu.edu.in" target="_blank"
+              rel="noopener noreferrer">www.rvu.edu.in</a></span>
+        </address>
+      </div>
     </div>
-  </section>
 
+    <div class="footer-bottom">
+      <div class="footer-bottom-container">
+        <p>&copy; 2026 RV University &bull; School of Computer Science &amp; Engineering. All rights reserved.</p>
 
-  <!-- React Mount Point -->
-  <section id="auth-section">
-    <div id="auth-root"></div>
-  </section>
+      </div>
+    </div>
+  </footer>
 
   <script>
     const slides = Array.from(document.querySelectorAll('.slide'));
@@ -147,4 +234,5 @@
 
   <script type="module" src="/src/main.jsx"></script>
 </body>
+
 </html>
