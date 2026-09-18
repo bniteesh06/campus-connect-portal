@@ -1,3 +1,10 @@
+/* ============================================================================= */
+/* [EXPERIMENT 4: APPLICATION ROUTING] State-Driven Page View Routing            */
+/* ----------------------------------------------------------------------------- */
+/* Handles routing between the landing page, authentication module, and the      */
+/* interactive Student Portal application state container.                       */
+/* ============================================================================= */
+
 import React, { useState, useEffect } from "react";
 import AuthModule from "./components/AuthModule.jsx";
 import StudentPortal from "./components/StudentPortal.jsx";
@@ -16,6 +23,8 @@ export default function App() {
       } else if (hash === "#register") {
         setAuthMode("register");
         setCurrentPage("login");
+      } else if (hash === "#student") {
+        setCurrentPage("student");
       }
     };
 
@@ -38,6 +47,7 @@ export default function App() {
     );
   }
 
+  // --- EXPERIMENT 4: Render Interactive Web Application with State Handling ---
   if (currentPage === "student") {
     return (
       <StudentPortal

@@ -11,6 +11,11 @@
 </head>
 
 <body>
+  <!-- ========================================================================= -->
+  <!-- [EXPERIMENT 2: START] Semantic HTML5 Structure & Responsive Layout       -->
+  <!-- Core tags: <header>, <nav>, <main>, <section>, <article>, and <footer>.   -->
+  <!-- ========================================================================= -->
+
   <!-- Semantic Header with Brand and Navigation -->
   <header class="navbar">
     <div class="logo-group">
@@ -105,7 +110,7 @@
               <li>Update Profile</li>
             </ul>
           </div>
-          <a href="#login" class="btn-portal student-bg">Access Student View</a>
+          <a href="#student" class="btn-portal student-bg">Access Student View</a>
         </article>
 
         <!-- Faculty Portal -->
@@ -140,7 +145,11 @@
       </div>
     </section>
 
-    <!-- Experiment 3: Dynamic Campus Notice Board (DOM Manipulation & Events) -->
+    <!-- ========================================================================= -->
+    <!-- [EXPERIMENT 3: START] Dynamic Campus Notice Board (DOM Manipulation & Events)-->
+    <!-- Aim: Client-side DOM scripting with dynamic creation, deletion, input events,-->
+    <!-- and Dark Mode theme toggling. Handled by /src/dom-script.js                 -->
+    <!-- ========================================================================= -->
     <section id="notice-board" class="section-container">
       <div class="notice-board-card">
         <h2 class="section-title">Campus Announcements &amp; Notice Board</h2>
@@ -173,11 +182,21 @@
         </div>
       </div>
     </section>
+    <!-- ========================================================================= -->
+    <!-- [EXPERIMENT 3: END] Dynamic Campus Notice Board                             -->
+    <!-- ========================================================================= -->
 
-    <!-- Section 4: React Mount Point -->
+    <!-- ========================================================================= -->
+    <!-- [EXPERIMENT 4: START] Interactive Web Application State Container           -->
+    <!-- Aim: State-driven interactive web application (Student Assignment &        -->
+    <!-- Submission Manager) mounted via React with in-memory state handling.       -->
+    <!-- ========================================================================= -->
     <section id="auth-section">
       <div id="auth-root"></div>
     </section>
+    <!-- ========================================================================= -->
+    <!-- [EXPERIMENT 4: END] Interactive Web Application State Container             -->
+    <!-- ========================================================================= -->
   </main>
 
   <!-- Semantic Footer -->
@@ -241,9 +260,14 @@
       </div>
     </div>
   </footer>
+  <!-- ========================================================================= -->
+  <!-- [EXPERIMENT 2: END] Semantic HTML5 Structure & Responsive Layout         -->
+  <!-- ========================================================================= -->
 
-  <!-- Experiment 3: External Client-Side Script (DOM Manipulation & Events) -->
+  <!-- [EXPERIMENT 3 SCRIPT] Client-Side Scripting: DOM Manipulation & Events -->
   <script type="module" src="/src/dom-script.js"></script>
+
+  <!-- [EXPERIMENT 4 SCRIPT] React State-Driven Application Lifecycle & Entry -->
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

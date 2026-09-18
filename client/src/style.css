@@ -1,3 +1,10 @@
+/* ============================================================================= */
+/* [EXPERIMENT 2: START] Semantic HTML5 Structure & Responsive CSS3 Design       */
+/* ----------------------------------------------------------------------------- */
+/* Includes: Design tokens, CSS Reset, Flexbox Navbar, Hero Banner, Highlights    */
+/* Carousel, Stakeholder Role Cards Grid, and Campus Footer.                     */
+/* ============================================================================= */
+
 :root {
     --primary-green: #0d5c3a;
     --accent-green: #107c41;
@@ -432,9 +439,12 @@ body {
     background-color: var(--admin-color);
 }
 
-/* ================================= */
-/* NOTICE BOARD (Experiment 3 DOM)   */
-/* ================================= */
+/* ============================================================================= */
+/* [EXPERIMENT 3: START] Dynamic Campus Notice Board & DOM Manipulation Styles    */
+/* ----------------------------------------------------------------------------- */
+/* Styles for dynamic announcement board, character counter, dynamic <li> item   */
+/* animations, and delete interactions.                                          */
+/* ============================================================================= */
 #notice-board {
     background-color: #ffffff;
     padding: 3.5rem 2rem;
@@ -550,6 +560,9 @@ body {
     color: #ffffff;
     transform: scale(1.1);
 }
+/* ============================================================================= */
+/* [EXPERIMENT 3: END] Dynamic Campus Notice Board & DOM Manipulation Styles      */
+/* ============================================================================= */
 
 /* ================================= */
 /* AUTH MODULE                       */
@@ -694,113 +707,387 @@ body {
     text-decoration: underline;
 }
 
-/* ================================= */
-/* STUDENT PORTAL                    */
-/* ================================= */
+/* ============================================================================= */
+/* [EXPERIMENT 4: START] Interactive Web Application with State Handling UI      */
+/* ----------------------------------------------------------------------------- */
+/* Aim: Styles for central in-memory state application (Student Assignment &     */
+/* Submission Manager). Includes: derived metric pills, add assignment form,     */
+/* dynamic filter tabs, toggleable status badges, and item deletion buttons.     */
+/* ============================================================================= */
+
 .student-portal {
-    min-height: 50vh;
-    background: white;
-    color: black;
-    padding: 100px;
-    border-radius: 100px 100px
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
 }
 
 .student-header {
-    max-width: 1200px;
-    margin: 0 auto;
     background: #172033;
     padding: 20px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 8px 8px 0 0;
+    border-bottom: 2px solid #243048;
 }
 
 .student-header h2 {
     margin: 0;
     color: #f2a900;
     font-size: 22px;
+    font-weight: 700;
 }
 
 .student-header p {
-    margin: 5px 0 0;
-    color: #ffffff;
+    margin: 4px 0 0;
+    color: #94a3b8;
     font-size: 13px;
 }
 
 .back-btn {
     background: #f2a900;
     border: none;
-    padding: 11px 18px;
-    border-radius: 4px;
+    padding: 10px 18px;
+    border-radius: 6px;
     color: #172033;
     font-weight: bold;
+    font-size: 13px;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .back-btn:hover {
-    opacity: 0.9;
+    background: #e59d00;
+    transform: translateX(-2px);
 }
 
 .portal-tabs {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
-    background: #dce5e9;
-    border-bottom: 1px solid #b7c1c7;
+    background: #e2e8f0;
+    border-bottom: 1px solid #cbd5e1;
 }
 
 .portal-tab {
     flex: 1;
-    padding: 15px;
+    padding: 14px 18px;
     border: none;
     background: transparent;
     cursor: pointer;
-    color: #263238;
+    color: #475569;
     font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    text-align: center;
 }
 
 .portal-tab:hover {
-    background: #e8eef1;
+    background: #f1f5f9;
+    color: #1e293b;
 }
 
 .active-tab {
     background: #ffffff;
-    font-weight: bold;
-    border-bottom: 3px solid #f2a900;
+    color: var(--primary-green);
+    font-weight: 700;
+    border-bottom: 3px solid var(--primary-green);
 }
 
 .student-content {
-    max-width: 1200px;
-    margin: 0 auto;
     background: #ffffff;
-    padding: 30px 25px;
-    min-height: 400px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 30px 28px;
+    min-height: 420px;
 }
 
 .student-content h3 {
     margin-top: 0;
-    color: #263238;
+    color: #1e293b;
     font-size: 20px;
+    font-weight: 700;
 }
 
+/* --- EXPERIMENT 4: STATE MANAGER & METRICS SECTION --- */
+.assignment-state-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.state-desc {
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 4px;
+    max-width: 650px;
+}
+
+/* Step 9: Derived State Summary Badges */
+.state-stats-bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.stat-pill {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.stat-pill.total {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.stat-pill.pending {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.stat-pill.submitted {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+/* Step 6: Add Assignment Form (Mutates State) */
+.add-assignment-form {
+    display: flex;
+    gap: 10px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    flex-wrap: wrap;
+}
+
+.portal-input {
+    flex: 2;
+    min-width: 200px;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: border-color 0.2s;
+}
+
+.portal-input:focus,
+.portal-input-sm:focus {
+    border-color: var(--primary-green);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(13, 92, 58, 0.15);
+}
+
+.portal-input-sm {
+    flex: 1;
+    min-width: 140px;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: border-color 0.2s;
+}
+
+.add-assignment-btn {
+    background: var(--primary-green);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.add-assignment-btn:hover {
+    background: var(--accent-green);
+    transform: translateY(-1px);
+}
+
+/* Dynamic Filter Tabs */
+.assignment-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin-right: 4px;
+}
+
+.filter-btn {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.filter-btn.active-filter {
+    background: var(--primary-green);
+    color: #ffffff;
+    border-color: var(--primary-green);
+}
+
+/* Step 7: Assignment List (Rendered from State) */
+.assignment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.empty-state-msg {
+    color: #94a3b8;
+    text-align: center;
+    padding: 30px;
+    font-style: italic;
+    background: #f8fafc;
+    border-radius: 6px;
+    border: 1px dashed #cbd5e1;
+}
+
+.assignment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.assignment-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.assignment-info h4 {
+    margin: 0 0 5px;
+    font-size: 15px;
+    color: #1e293b;
+}
+
+.assignment-info p {
+    margin: 0;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.assignment-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Step 8: Edit / Toggle Status Action Badge */
+.clickable-status {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.clickable-status:hover {
+    transform: scale(1.03);
+    filter: brightness(0.95);
+}
+
+.clickable-status.pending {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.clickable-status.submitted {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.toggle-hint {
+    font-size: 10px;
+    opacity: 0.7;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+/* Step 8: Remove Assignment Action Button */
+.delete-assignment-btn {
+    background: transparent;
+    color: #ef4444;
+    border: 1px solid #fca5a5;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-assignment-btn:hover {
+    background: #ef4444;
+    color: #ffffff;
+    border-color: #ef4444;
+}
+
+/* Notices Tab in Student Portal */
 .notice-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 5px;
-    border-bottom: 1px solid #e1e5e8;
+    padding: 16px 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 
 .notice-item h4 {
-    margin: 0 0 7px;
-    font-size: 16px;
+    margin: 0 0 6px;
+    font-size: 15px;
+    color: #1e293b;
 }
 
 .notice-item p {
     margin: 0;
-    color: #68747c;
+    color: #64748b;
     font-size: 12px;
 }
 
@@ -808,48 +1095,19 @@ body {
     background: #172033;
     color: white;
     border: none;
-    padding: 8px 13px;
-    border-radius: 4px;
+    padding: 8px 14px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 12px;
+    font-weight: 600;
+    transition: background 0.2s ease;
 }
 
-.assignment-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 5px;
-    border-bottom: 1px solid #e1e5e8;
+.details-btn:hover {
+    background: #243048;
 }
 
-.assignment-item h4 {
-    margin: 0 0 7px;
-    font-size: 16px;
-}
-
-.assignment-item p {
-    margin: 0;
-    color: #68747c;
-    font-size: 12px;
-}
-
-.status {
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.pending {
-    background: #f2c94c;
-    color: #333;
-}
-
-.submitted {
-    background: #22a65a;
-    color: white;
-}
-
+/* Attendance Tab */
 .attendance-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -857,35 +1115,47 @@ body {
 }
 
 .attendance-card {
-    border: 1px solid #d9e0e4;
-    padding: 25px;
+    border: 1px solid #e2e8f0;
+    padding: 22px;
     text-align: center;
-    border-radius: 6px;
-    background: #fafcfd;
+    border-radius: 8px;
+    background: #f8fafc;
 }
 
 .attendance-card h4 {
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     font-size: 15px;
+    color: #1e293b;
 }
 
 .attendance-card strong {
-    font-size: 16px;
-    color: #263238;
+    font-size: 18px;
+    color: var(--primary-green);
 }
 
+/* Profile Tab */
 .profile-card {
-    border: 1px solid #d9e0e4;
+    border: 1px solid #e2e8f0;
     padding: 20px;
-    border-radius: 6px;
-    background: #fafcfd;
+    border-radius: 8px;
+    background: #f8fafc;
 }
 
 .profile-card p {
     padding: 10px 0;
     margin: 0;
-    border-bottom: 1px solid #e5e8ea;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #334155;
 }
+
+.profile-card p:last-child {
+    border-bottom: none;
+}
+
+/* ============================================================================= */
+/* [EXPERIMENT 4: END] Interactive Web Application with State Handling UI        */
+/* ============================================================================= */
 
 /* ================================= */
 /* CAMPUS FOOTER (Experiment 2)      */
@@ -1019,9 +1289,11 @@ body {
     font-weight: 600;
 }
 
-/* ================================= */
-/* DARK MODE / NORMAL MODE (Exp 3)   */
-/* ================================= */
+/* ============================================================================= */
+/* [EXPERIMENT 3: START] Dark Mode / Normal Mode Dynamic Theme Styles             */
+/* ----------------------------------------------------------------------------- */
+/* Styles applied to document.body.dark-mode when toggled by DOM click event.    */
+/* ============================================================================= */
 body.dark-mode {
     background-color: black;
     color: #e2e8f0;
@@ -1172,9 +1444,95 @@ body.dark-mode .form-group input {
     border-color: #475569;
 }
 
-/* ================================= */
-/* RESPONSIVE DESIGN (Experiment 2)  */
-/* ================================= */
+body.dark-mode .student-portal {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .student-header {
+    background-color: #020617;
+    border-bottom-color: #1e293b;
+}
+
+body.dark-mode .portal-tabs {
+    background-color: #1e293b;
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .portal-tab {
+    color: #94a3b8;
+}
+
+body.dark-mode .portal-tab:hover {
+    background-color: #334155;
+    color: #f8fafc;
+}
+
+body.dark-mode .portal-tab.active-tab {
+    background-color: #0f172a;
+    color: #4ade80;
+    border-bottom-color: #4ade80;
+}
+
+body.dark-mode .student-content {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+body.dark-mode .student-content h3 {
+    color: #4ade80;
+}
+
+body.dark-mode .section-header-row {
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .add-assignment-form {
+    background-color: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .portal-input,
+body.dark-mode .portal-input-sm {
+    background-color: #0f172a;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode .assignment-item {
+    background-color: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .assignment-info h4 {
+    color: #f8fafc;
+}
+
+body.dark-mode .attendance-card,
+body.dark-mode .profile-card {
+    background-color: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .attendance-card h4 {
+    color: #f8fafc;
+}
+
+body.dark-mode .profile-card p {
+    color: #cbd5e1;
+    border-bottom-color: #334155;
+}
+
+/* ============================================================================= */
+/* [EXPERIMENT 3: END] Dark Mode / Normal Mode Dynamic Theme Styles               */
+/* ============================================================================= */
+
+/* ============================================================================= */
+/* [EXPERIMENT 2: START] Responsive Design Media Queries (Tablet & Mobile)       */
+/* ----------------------------------------------------------------------------- */
+/* Responsive layout breakpoints adjusting grids, flex orientations, and sizing   */
+/* ============================================================================= */
 
 /* Tablet Breakpoint (max-width: 992px) */
 @media (max-width: 992px) {
@@ -1370,3 +1728,6 @@ body.dark-mode .form-group input {
         padding: 1.5rem 1.2rem;
     }
 }
+/* ============================================================================= */
+/* [EXPERIMENT 2: END] Responsive Design Media Queries                           */
+/* ============================================================================= */
