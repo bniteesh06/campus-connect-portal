@@ -433,6 +433,125 @@ body {
 }
 
 /* ================================= */
+/* NOTICE BOARD (Experiment 3 DOM)   */
+/* ================================= */
+#notice-board {
+    background-color: #ffffff;
+    padding: 3.5rem 2rem;
+}
+
+.notice-board-card {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.input-action-group {
+    display: flex;
+    gap: 12px;
+    margin: 1.5rem 0 0.5rem 0;
+    flex-wrap: wrap;
+}
+
+.notice-input {
+    flex: 1;
+    min-width: 260px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.notice-input:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(13, 92, 58, 0.15);
+}
+
+.input-meta {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.25rem;
+}
+
+.char-count {
+    font-size: 0.82rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.board-list-wrapper {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.notice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notice-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    padding: 0.85rem 1rem;
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-green);
+    transition: all 0.2s ease;
+}
+
+.notice-list-item:hover {
+    background: #f1f5f9;
+}
+
+.notice-list-item.removing {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.item-text {
+    font-size: 0.95rem;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.delete-btn {
+    background: #fee2e2;
+    color: #dc2626;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* ================================= */
 /* AUTH MODULE                       */
 /* ================================= */
 #auth-section {
@@ -901,6 +1020,159 @@ body {
 }
 
 /* ================================= */
+/* DARK MODE / NORMAL MODE (Exp 3)   */
+/* ================================= */
+body.dark-mode {
+    background-color: black;
+    color: #e2e8f0;
+}
+
+body.dark-mode .navbar {
+    background-color: black;
+    border-bottom-color: black;
+}
+
+body.dark-mode .nav-link {
+    color: #94a3b8;
+}
+
+body.dark-mode .nav-link:hover {
+    color: #4ade80;
+    background-color: rgba(74, 222, 128, 0.1);
+}
+
+body.dark-mode .university-name {
+    color: #f8fafc;
+}
+
+body.dark-mode .sub-dept {
+    color: #94a3b8;
+}
+
+body.dark-mode .btn-secondary {
+    color: #4ade80;
+    border-color: #4ade80;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background-color: rgba(74, 222, 128, 0.12);
+}
+
+body.dark-mode .section-container {
+    background-color: #0b1120;
+}
+
+body.dark-mode .section-title {
+    color: #4ade80;
+}
+
+body.dark-mode .section-subtitle {
+    color: #94a3b8;
+}
+
+body.dark-mode #roles {
+    background-color: #0f172a;
+}
+
+body.dark-mode #roles .section-title {
+    color: #f8fafc;
+}
+
+body.dark-mode .role-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .role-card h3 {
+    color: #f8fafc;
+}
+
+body.dark-mode .feature-bullets {
+    color: #cbd5e1;
+}
+
+body.dark-mode .feature-bullets li::before {
+    color: #94a3b8;
+}
+
+body.dark-mode #notice-board {
+    background-color: #0b1120;
+}
+
+body.dark-mode .notice-board-card {
+    background: #0f172a;
+    border-color: #334155;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .notice-input {
+    background: #1e293b;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode .notice-input:focus {
+    border-color: #4ade80;
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+}
+
+body.dark-mode .char-count {
+    color: #94a3b8;
+}
+
+body.dark-mode .board-list-wrapper {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+body.dark-mode .notice-list-item {
+    background: #0f172a;
+    border-left-color: #4ade80;
+}
+
+body.dark-mode .notice-list-item:hover {
+    background: #131c31;
+}
+
+body.dark-mode .item-text {
+    color: #f8fafc;
+}
+
+body.dark-mode .delete-btn {
+    background: rgba(220, 38, 38, 0.2);
+    color: #f87171;
+}
+
+body.dark-mode .delete-btn:hover {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+body.dark-mode #auth-section {
+    background-color: black;
+}
+
+body.dark-mode .auth-card {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+}
+
+body.dark-mode .auth-header h2 {
+    color: #4ade80;
+}
+
+body.dark-mode .form-group label {
+    color: #e2e8f0;
+}
+
+body.dark-mode .form-group input {
+    background-color: #1e293b;
+    color: #ffffff;
+    border-color: #475569;
+}
+
+/* ================================= */
 /* RESPONSIVE DESIGN (Experiment 2)  */
 /* ================================= */
 
@@ -994,6 +1266,25 @@ body {
 
     #roles {
         padding: 2.5rem 1.25rem 2.5rem 1.25rem;
+    }
+
+    #notice-board {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .notice-board-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .input-action-group {
+        flex-direction: column;
+    }
+
+    .notice-input,
+    .input-action-group .btn-primary,
+    .input-action-group .btn-secondary {
+        width: 100%;
+        text-align: center;
     }
 
     .roles-grid {

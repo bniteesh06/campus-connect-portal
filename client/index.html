@@ -26,6 +26,7 @@
       <a href="#hero" class="nav-link">Home</a>
       <a href="#highlights" class="nav-link">Highlights</a>
       <a href="#roles" class="nav-link">Portals</a>
+      <a href="#notice-board" class="nav-link">Notice Board</a>
     </nav>
 
     <!-- Navigation Action Buttons -->
@@ -139,6 +140,40 @@
       </div>
     </section>
 
+    <!-- Experiment 3: Dynamic Campus Notice Board (DOM Manipulation & Events) -->
+    <section id="notice-board" class="section-container">
+      <div class="notice-board-card">
+        <h2 class="section-title">Campus Announcements &amp; Notice Board</h2>
+
+        <!-- Dynamic Controls: Text Input & Action Buttons -->
+        <div class="input-action-group">
+          <input type="text" id="noticeInput" class="notice-input"
+            placeholder="Type a new campus announcement and press Enter..." autocomplete="off" maxlength="120" />
+          <button id="addNoticeBtn" class="btn-primary">Add Announcement</button>
+          <button id="themeToggleBtn" class="btn-secondary">🌙 Dark Mode</button>
+        </div>
+
+        <!-- Real-Time Input Event Counter -->
+        <div class="input-meta">
+          <span id="charCount" class="char-count">0 / 120 characters</span>
+        </div>
+
+        <!-- Dynamic List Container (DOM Append & Remove) -->
+        <div class="board-list-wrapper">
+          <ul id="noticeList" class="notice-list">
+            <li class="notice-list-item">
+              <span class="item-text">📢 Welcome to RV University Campus Connect Portal!</span>
+              <button class="delete-btn" aria-label="Delete notice" title="Delete notice">&times;</button>
+            </li>
+            <li class="notice-list-item">
+              <span class="item-text">🗓️ CS3301 Full Stack Lab Session every Friday at SOCE Labs.</span>
+              <button class="delete-btn" aria-label="Delete notice" title="Delete notice">&times;</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- Section 4: React Mount Point -->
     <section id="auth-section">
       <div id="auth-root"></div>
@@ -169,6 +204,7 @@
             <li><a href="#hero">Home</a></li>
             <li><a href="#highlights">Highlights</a></li>
             <li><a href="#roles">Portals</a></li>
+            <li><a href="#notice-board">Notice Board</a></li>
             <li><a href="#login">Student Login</a></li>
             <li><a href="#register">Register</a></li>
           </ul>
@@ -206,32 +242,8 @@
     </div>
   </footer>
 
-  <script>
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const dots = Array.from(document.querySelectorAll('.dot'));
-    let currentSlide = 0;
-    let carouselTimer;
-
-    function showSlide(index) {
-      currentSlide = (index + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => slide.classList.toggle('active-slide', slideIndex === currentSlide));
-      dots.forEach((dot, dotIndex) => dot.classList.toggle('active-dot', dotIndex === currentSlide));
-    }
-
-    function startCarousel() {
-      carouselTimer = window.setInterval(() => showSlide(currentSlide + 1), 4000);
-    }
-
-    document.getElementById('prevBtn').addEventListener('click', () => showSlide(currentSlide - 1));
-    document.getElementById('nextBtn').addEventListener('click', () => showSlide(currentSlide + 1));
-    dots.forEach((dot) => dot.addEventListener('click', () => showSlide(Number(dot.dataset.index))));
-
-    const carousel = document.querySelector('.carousel-wrapper');
-    carousel.addEventListener('mouseenter', () => window.clearInterval(carouselTimer));
-    carousel.addEventListener('mouseleave', startCarousel);
-    startCarousel();
-  </script>
-
+  <!-- Experiment 3: External Client-Side Script (DOM Manipulation & Events) -->
+  <script type="module" src="/src/dom-script.js"></script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 
