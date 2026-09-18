@@ -899,3 +899,183 @@ body {
     color: #f2a900;
     font-weight: 600;
 }
+
+/* ================================= */
+/* RESPONSIVE DESIGN (Experiment 2)  */
+/* ================================= */
+
+/* Tablet Breakpoint (max-width: 992px) */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+
+    .hero-banner h1 {
+        font-size: 2.1rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .roles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile Breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .logo-group {
+        justify-content: center;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .nav-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-banner {
+        padding: 3rem 1.25rem;
+    }
+
+    .hero-banner h1 {
+        font-size: 1.75rem;
+        margin: 0.75rem 0;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .hero-cta-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-hero-primary {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        padding: 0.5rem 1.25rem;
+    }
+
+    .section-container {
+        padding: 3rem 1.25rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .slide img {
+        height: 250px;
+    }
+
+    .slide-caption {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+
+    #roles {
+        padding: 2.5rem 1.25rem 2.5rem 1.25rem;
+    }
+
+    .roles-grid {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: left;
+        padding: 0 1.25rem 2rem 1.25rem;
+    }
+
+    .footer-bottom-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    /* Student Portal Mobile rules */
+    .student-portal {
+        padding: 15px;
+    }
+
+    .student-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .portal-tabs {
+        flex-direction: column;
+    }
+
+    .portal-tab {
+        width: 100%;
+    }
+
+    .notice-item,
+    .assignment-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .attendance-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small Mobile Breakpoint (max-width: 480px) */
+@media (max-width: 480px) {
+    .university-name {
+        font-size: 0.95rem;
+    }
+
+    .sub-dept {
+        font-size: 0.8rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.9rem;
+    }
+
+    .hero-banner h1 {
+        font-size: 1.45rem;
+    }
+
+    .slide img {
+        height: 200px;
+    }
+
+    .carousel-btn {
+        font-size: 1.1rem;
+        padding: 6px;
+    }
+
+    .role-card {
+        padding: 1.5rem 1.2rem;
+    }
+}
