@@ -1,4 +1,9 @@
-
+/* ============================================================================= */
+/* [EXPERIMENT 3: START] Client-Side Scripting - DOM Manipulation & Events        */
+/* ----------------------------------------------------------------------------- */
+/* Aim: Implement DOM element selection, event listeners, dynamic DOM creation &  */
+/* removal, real-time input handling, and theme toggling without page reloading.  */
+/* ============================================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -155,3 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('[Exp 3]: Client-side scripting with Dark Mode toggle and DOM manipulation initialized.');
 });
+/* ============================================================================= */
+/* [EXPERIMENT 3: END] Client-Side Scripting - DOM Manipulation & Events          */
+/* ============================================================================= */
