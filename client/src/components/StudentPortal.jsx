@@ -12,13 +12,14 @@
 /*               - AttendanceCard.jsx (reusable attendance card with props)      */
 /* ============================================================================= */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../style.css";
 import StatBadge from "./StatBadge.jsx";
 import AssignmentForm from "./AssignmentForm.jsx";
 import AssignmentCard from "./AssignmentCard.jsx";
 import NoticeCard from "./NoticeCard.jsx";
 import AttendanceCard from "./AttendanceCard.jsx";
+import assignmentService from "../services/assignmentService.js";
 
 export default function StudentPortal({ onBackToHome }) {
   // =============================================================================
@@ -86,37 +87,99 @@ export default function StudentPortal({ onBackToHome }) {
     },
   ];
 
-  // --- EXPERIMENT 4: STATE MUTATION ROUTINES (Invoked by child callback props) ---
+  // [EXPERIMENT 6: START] Consuming Backend RESTful Services (Node.js & Express)
+  // Aim: Consume backend API endpoints (GET, POST, PATCH, DELETE) to sync React
+  // state with Express server running at http://localhost:5000/api/assignments
+  const [apiStatus, setApiStatus] = useState("connecting"); // 'connected' | 'offline'
 
-  // Step 6: Add New Item to Parent State (invoked by AssignmentForm via onAddAssignment prop)
-  const handleAddAssignment = (newAssignmentData) => {
-    const newAssignment = {
-      id: Date.now(),
+  // Fetch all assignments from Node/Express backend service on mount (READ - GET)
+  useEffect(() => {
+    const fetchAssignmentsFromAPI = async () => {
+      try {
+        const response = await assignmentService.getAll();
+        if (response && response.data) {
+          setAssignmentsList(response.data);
+          setApiStatus("connected");
+        }
+      } catch (err) {
+        console.warn("[EXP 6] Backend service offline, using initial state:", err.message);
+        setApiStatus("offline");
+      }
+    };
+
+    fetchAssignmentsFromAPI();
+  }, []);
+
+  // --- EXPERIMENT 4 & 6: STATE MUTATION & API CONSUMPTION ROUTINES ---
+
+  // Step 6: Create New Item (POST /api/assignments) & Update State
+  const handleAddAssignment = async (newAssignmentData) => {
+    const tempId = Date.now();
+    const tempAssignment = {
+      id: tempId,
       ...newAssignmentData,
       status: "Pending",
     };
 
-    setAssignmentsList([newAssignment, ...assignmentsList]);
+    // Optimistic UI state update
+    setAssignmentsList((prevList) => [tempAssignment, ...prevList]);
+
+    try {
+      // Consume Backend POST Endpoint
+      const response = await assignmentService.create(newAssignmentData);
+      if (response && response.data) {
+        setAssignmentsList((prevList) =>
+          prevList.map((item) => (item.id === tempId ? response.data : item))
+        );
+        setApiStatus("connected");
+      }
+    } catch (err) {
+      console.warn("[EXP 6] Backend POST failed, maintained in local state:", err.message);
+      setApiStatus("offline");
+    }
   };
 
-  // Step 8: Edit/Toggle Item State (invoked by AssignmentCard via onToggleStatus prop)
-  const handleToggleStatus = (id) => {
+  // Step 8: Edit/Toggle Item State (PATCH /api/assignments/:id) & Update State
+  const handleToggleStatus = async (id) => {
+    const targetItem = assignmentsList.find((item) => item.id === id);
+    if (!targetItem) return;
+
+    const updatedStatus = targetItem.status === "Submitted" ? "Pending" : "Submitted";
+
+    // Optimistic UI update
     setAssignmentsList((prevList) =>
       prevList.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              status: item.status === "Submitted" ? "Pending" : "Submitted",
-            }
-          : item
+        item.id === id ? { ...item, status: updatedStatus } : item
       )
     );
+
+    try {
+      // Consume Backend PATCH Endpoint
+      await assignmentService.update(id, { status: updatedStatus });
+      setApiStatus("connected");
+    } catch (err) {
+      console.warn("[EXP 6] Backend PATCH failed, maintained in local state:", err.message);
+      setApiStatus("offline");
+    }
   };
 
-  // Step 8: Remove Item from State (invoked by AssignmentCard via onDelete prop)
-  const handleDeleteAssignment = (id) => {
+  // Step 8: Remove Item from State (DELETE /api/assignments/:id) & Update State
+  const handleDeleteAssignment = async (id) => {
+    // Optimistic UI update
     setAssignmentsList((prevList) => prevList.filter((item) => item.id !== id));
+
+    try {
+      // Consume Backend DELETE Endpoint
+      await assignmentService.remove(id);
+      setApiStatus("connected");
+    } catch (err) {
+      console.warn("[EXP 6] Backend DELETE failed, maintained in local state:", err.message);
+      setApiStatus("offline");
+    }
   };
+  // =============================================================================
+  // [EXPERIMENT 6: END] Consuming Backend RESTful Services (Node.js & Express)
+  // =============================================================================
 
   // Step 7: Redraw List from Current Filter State
   const filteredAssignments = assignmentsList.filter((item) => {
@@ -138,7 +201,21 @@ export default function StudentPortal({ onBackToHome }) {
       <header className="student-header">
         <div>
           <h2>🎓 Student Portal</h2>
-          <p>Welcome, RVU Student</p>
+          <p>
+            Welcome, RVU Student &bull;{" "}
+            <span
+              style={{
+                fontSize: "0.82rem",
+                padding: "2px 8px",
+                borderRadius: "12px",
+                backgroundColor: apiStatus === "connected" ? "#e6f4ea" : "#fce8e6",
+                color: apiStatus === "connected" ? "#137333" : "#c5221f",
+                fontWeight: 600,
+              }}
+            >
+              ● REST API: {apiStatus === "connected" ? "Express (Port 5000)" : "Standalone Mode"}
+            </span>
+          </p>
         </div>
 
         <button className="back-btn" onClick={onBackToHome}>

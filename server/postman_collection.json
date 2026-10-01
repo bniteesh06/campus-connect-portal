@@ -1,0 +1,163 @@
+{
+  "info": {
+    "_postman_id": "exp6-campus-connect-assignments",
+    "name": "Experiment 6 - RESTful API (Campus Connect Assignments)",
+    "description": "Postman Collection for CS3301 Full Stack Development Lab - Experiment 6: Developing and Consuming Backend Services Using RESTful API Principles (Node.js & Express)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. GET Server Health & Info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            ""
+          ]
+        }
+      }
+    },
+    {
+      "name": "2. READ All Assignments (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/assignments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "assignments"
+          ]
+        }
+      }
+    },
+    {
+      "name": "3. READ Single Assignment by ID (GET)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/assignments/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "assignments",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4. CREATE New Assignment (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Cloud Computing Containerization Lab\",\n  \"subject\": \"CS3304 - Cloud\",\n  \"due\": \"Oct 10, 2026\",\n  \"status\": \"Pending\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/assignments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "assignments"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. UPDATE Assignment Status (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"Submitted\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/assignments/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "assignments",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. DELETE Assignment by ID (DELETE)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/assignments/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "assignments",
+            "2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "7. TEST 404 Route Not Found Middleware",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/nonexistent",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "nonexistent"
+          ]
+        }
+      }
+    }
+  ]
+}
